@@ -44,13 +44,77 @@ mo8 = plusRegex.search('The adventures of Batwowowoman')
 mo9 = plusRegex.search('The adventures of Batman')
 print(mo8.group())
 print(mo7.group())
-print(mo9.group())
+mo9 == None
 
 
 # matching specific repetitions with braces
 
+haRegex = re.compile(r'(Ha){3}')
+mo10 = haRegex.search('HaHaHa')
+print(mo10.group())
+
+
+# greedy and non-greedy matching
+
+greedyHaRegex = re.compile(r'(Ha){3,5}')
+mo11 = greedyHaRegex.search('HaHaHaHaHa')
+print(mo11.group())
+
+nongreedyHaRegex = re.compile(r'(Ha){2,5}?') # note question mark have two meaning optional group or non-greedy match
+mo12 = nongreedyHaRegex.search('HaHaHaHaHa')
+print(mo12.group())
+
+
+# character classes
+#
+# \d - any numeric digit 0 - 9
+# \D - not a numeric digit from 0 - 9
+# \w - word character and underscore
+# \W - any character not a word or underscore
+# \s - space, tab, or newline
+# \S - not a space, tab, or newline
+
+xmasRegex = re.compile(r'\d+\s\w+')
+mo13 = xmasRegex.findall('12 drummers, 11 pipers, 10 lords, 5 rings')
+print(mo13)
+
+
+# making your own character classes
+#
+# example: [a-zA-Z0-9] will match all lowercase letters, uppercase, and numbers.
+# note: inside the square bracket no need to escape the symbol
+# caret character (^) in opening bracket = opposite/negative class
+
+
+vowelRegex = re.compile(r'[aeiouAEIOU]') # matching all vowel letters
+mo14 = vowelRegex.findall('RoboCop eats BABY FOOD.')
+print(mo14)
+
+
+# caret and dollar sign characters (Carrots cost dollars)
+#
+# ^ at the beginning and $ at the end indicate the string must end with regex pattern
+
+beginsWithHello = re.compile(r'^Hello')
+mo15 = beginsWithHello.search('Hello, world')
+print(mo15.group())
+
+endsWithNumber = re.compile(r'\d+$')
+mo16 = endsWithNumber.search('Your number is 42')
+print(mo16.group())
+
+
+#  wildcard character
+#
+# . (dot) char = wildcard and will match any character expect for a newline
+#
+
+atRegex = re.compile(r'.at')
+mo17 = atRegex.findall('The cat in the hat sat on the flat mat')
+print(mo17)
 
 
 
+# matching everything with Dot-Star
 
 
